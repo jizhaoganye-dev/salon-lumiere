@@ -674,10 +674,11 @@ async function sendMessage() {
   showTyping();
 
   try {
+    const formData = new FormData();
+    formData.append('history', JSON.stringify(chatHistory));
     const res = await fetch(GAS_PROXY_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ history: chatHistory })
+      body: formData
     });
     const data = await res.json();
     hideTyping();
